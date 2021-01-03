@@ -1,0 +1,31 @@
+doctype strict
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    title #WEEKLY Challenges: The Comeback
+    link(rel="stylesheet" href="style/main.css")
+    link(rel="icon" href="favicon.svg")
+  body
+    if name
+      nav
+        // a.options.curr This Week's Challenge
+        if ["firefish", "Kookiez", "programmeruser"].includes(name)
+          a.options(href="/adminpanel") Administrative Tools
+        a.options(href="/chal") This Week's Challenge
+        s
+          a.options(href="/leader") Leaderboard
+      h1.title Welcome to #[em #WEEKLY].
+      div
+        | The home of the weekly repl.it challenges.
+        | This is the place to go to, if you want to
+        ul 
+          li Submit your entries
+          li Find the leaderboard results
+          li Find certain challenges, if you have trouble finding the announcement.
+        br
+        button
+          a(href="/submit") Submit an entry now
+    else
+      h1.title Please authenticate here.
+      script(authed="location.reload()" src="./auth.js")
+    // h1 #WEEKLY Challenge &numero;#{chal}

@@ -1,0 +1,84 @@
+doctype strict
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    title Submit an entry
+    link(rel="stylesheet" href="style/main.css")
+    link(rel="icon" href="favicon.svg")
+    script(src="/socket.io/socket.io.js")
+  body
+    svg(display="none")
+      defs
+        g#star(fill="var(--misc)")
+          path(d="M12 7.13l.97 2.29.47 1.11 1.2.1 2.47.21-1.88 1.63-.91.79.27 1.18.56 2.41-2.12-1.28-1.03-.64-1.03.62-2.12 1.28.56-2.41.27-1.18-.91-.79-1.88-1.63 2.47-.21 1.2-.1.47-1.11.97-2.27M12 2L9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2z")
+    nav
+      // a.options.curr This Week's Challenge
+      if ["firefish", "Kookiez", "programmeruser"].includes(name)
+        a.options(href="/adminpanel") Administrative Tools
+      a.options(href="/chal") This Week's Challenge
+      a.options(href="/leader") Leaderboard
+    h1.title Submission
+    div
+      h3.
+        Hi #{name}! Welcome to the submission form! #[br]
+        Submitting to #WEEKLY #{num}.
+      br
+      div Please provide repl name.
+      br
+      form
+        label(for="replname") &commat;#{name} /
+        input(type="text" id="replname" name="replname")
+      button(id="go") Submit
+      div.error
+        div#failure(hidden) Repl is private or does not exist.
+        div#success(hidden) Success!
+    h1.title Rating
+    div
+      div.error
+        div#info(hidden) Rating will appear once the challenge has ended.
+      br
+      div.med
+        div
+          | Creativity:
+          svg.creativity(height="16" width="80" viewBox="0 0 24 24")
+        div
+          | Algorithm:
+          svg.algorithm(height="16" width="80" viewBox="0 0 24 24")
+        div
+          | Code Presentation:
+          svg.present(height="16" width="80" viewBox="0 0 24 24")
+
+    script.
+      const sock = io(),
+        data = !{JSON.stringify(dat)},
+        rate = data.rating,
+        lek  = l => l ? "success" : "failure",
+        proc = (name, ix) => {
+          let ipol = document.querySelector(`svg.${name}`);
+          for (let cq = 1; cq <= rate[ix]; ++cq) {
+            let elem = document.createElementNS('http://www.w3.org/2000/svg', "use")
+            elem.setAttributeNS('http://www.w3.org/1999/xlink', "xlink:href", "#star");
+            elem.setAttribute("x", (20 * (cq - 3)).toString())
+            ipol.appendChild(elem);
+          }
+        }
+
+      if (rate) {
+        proc("creativity", 0);
+        proc("algorithm", 1);
+        proc("present", 2);
+      } else document.querySelector("div#info").removeAttribute("hidden");
+
+      window.submit = (...args) => sock.emit("submit", ...args);
+
+      sock.on("do", err => {
+        document.querySelector(`div#${lek(!err)}`).setAttribute("hidden", "");
+        document.querySelector(`div#${lek(err)}`).removeAttribute("hidden");
+      });
+
+      document
+        .querySelector("button#go")
+        .setAttribute("onclick", "window.submit(#{num}, \"#{name}\", document.querySelector(\"input#replname\").value)");
+
+
+      

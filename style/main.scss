@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+:not(pre) {
+  font-family: "IBM Plex Mono";
+  color: white;
+  background: #1F232B;
+  text-align: center;
+  --yes: #0fbf4dfd;
+  --no: #d11c0f;
+  --misc: #e9c810;
+} a {
+  display: inline-block;
+  &.options {
+    text-decoration: none;
+    font-size: 20px;
+    margin-right: 36px;
+    &.curr {
+      color: var(--yes);
+      font-weight: 700;
+    }
+  }
+} nav {
+  text-align: right;
+} h1 {
+  &.title {
+    font-size: 50px;
+    margin-top: 34px;
+    padding-top: 6px;
+  } &.intro {
+    color: var(--yes);
+    font-size: 30px;
+  }
+} button {
+  font-size: 17px;
+  padding: 15px 32px;
+  border: none;
+  color: white;
+  text-align: center;
+  border-radius: 50px;
+  transition: background 215ms !important;
+  margin-bottom: 15px;
+  &, & > a {
+    text-decoration: none;
+    background: #605f57 !important;
+  } &:active {
+    background: var(--yes);
+  }
+} ul > li {
+  text-align: left;
+} form {
+  margin-bottom: 30px;
+  & > * {
+    font-weight: 700;
+    margin-right: 10px;
+  } & > label {
+    color: var(--no);
+  } & > input[type=text] {
+    width: 50%;
+    @at-root pre, &:focus {
+      padding: 10px;
+      border-radius: 5px;
+      background: #ccc;
+      color: black;
+    }
+  }
+} div {
+  &.error > & {
+    font-weight: 700;
+    &#success {
+      color: var(--yes); 
+    } &#failure {
+      color: var(--no);
+    } &#info {
+      color: var(--misc);
+    }
+  }
+}

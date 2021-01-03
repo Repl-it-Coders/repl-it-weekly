@@ -1,0 +1,22 @@
+doctype strict
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    title Woops... Page not found
+    link(rel="stylesheet" href="style/main.css")
+    link(rel="icon" href="favicon.svg")
+  body
+    nav
+      // a.options.curr This Week's Challenge
+      a.options(href="/") Back to Home
+    if err == 404
+      h1.title Error 404: Page Not Found
+      div We couldn't find the page you were looking for.
+      div Maybe there is a typo in the url?
+    else if err == 403
+      h1.title Error 401: Unauthorised
+      div You are probably trying to access a page that may
+      ul
+        li Require a user log-in
+        li Require an administrator log-in
+      

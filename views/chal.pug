@@ -1,0 +1,13 @@
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    title This Week's Challenge
+    link(rel="stylesheet" href="style/main.css")
+    link(rel="icon" href="favicon.svg")
+  body
+    nav
+      // a.options.curr This Week's Challenge
+      if ["firefish", "Kookiez", "programmeruser"].includes(name)
+        a.options(href="/adminpanel") Administrative Tools
+      a.options.curr(href="/chal") This Week's Challenge
+      a.options(href="/leader") Leaderboard

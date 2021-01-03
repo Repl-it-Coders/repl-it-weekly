@@ -1,0 +1,21 @@
+doctype strict
+include ../chal.pug
+h1.title #WEEKLY Challenge 1
+div
+  | We are starting off nice and simple. #[br]
+  | Today's challenge is about:
+  h1.intro 2's complement subtraction.
+  | You can research the 2's complement conversion method on #[a.link(href="https://en.wikipedia.org/wiki/Two%27s_complement") Wikipedia]. #[br]
+  | Your aim is to add the minuend #[em (the first number in a subtraction sum, #[strong usually] the largest)] to the 2's complement of the subtrahend #[em the second number], and set the most-significant digit from 1 to zero.
+  | You are allowed to use plain subtraction, #[strong BUT] only to check your answer.
+  | For example, here is my input: #[br]
+  pre
+    | Please enter your minuend: 133
+    | Please enter your subtrahend: 39
+  | And here is example output:
+  pre
+    | The output from 2's complement subtraction: 94
+    | The correct answer: 94
+    | The answers match.
+  
+  
